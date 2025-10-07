@@ -1,4 +1,4 @@
-using UnityEngine;
+sing UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
