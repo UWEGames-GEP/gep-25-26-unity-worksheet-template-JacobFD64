@@ -1,34 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public abstract class Inventory : MonoBehaviour
 {
-    public List<string> items = new List<string>();
+    [SerializeField] private List<Item> items = new(); 
 
-    public GameManager gameManager;
+    protected GameManager gameManager;
 
-    public void Start()
+    private void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
     }
-    public void Update()
+
+    public void AddItemToInventory(ItemData itemData, int amount = 1)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AddItemToInventory("Generic Item");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            RemoveItemFromInventory("Generic Item");
-        }
-    }
-    public void AddItemToInventory(string item)
-    {
-        items.Add(item);
+        var existingItem = items.Find(i => i.data == itemData);
+        
+        if (existingItem == null) { return; }
+
+        items.Add(new Item(itemData, amount));
+
     }
 
-    public void RemoveItemFromInventory(string item)
+    public void RemoveItemFromInventory(ItemData itemData, int amount = 1)
     {
-        items.Remove(item);
+        var existingItem = items.Find(i => i.data == itemData);
+
+        if (existingItem == null) { return; }
+
+        existingItem.amount =- amount;
+
+        if (existingItem.amount >= 0)
+        {
+            items.Remove(existingItem);
+        }
     }
 }

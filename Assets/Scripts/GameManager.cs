@@ -1,23 +1,20 @@
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
 {
     private GameState currentGameState;
 
-    public enum currentGameStateType
-    {
-        Gameplay,
-        Pause
-    }
+    public GameState currentState => currentGameState;
+
+    public PlayerInput input;
 
 
     private void Start()
     {
         var gameplay = new GameplayState(this);
-        var pause = new PauseState(this);
+        var pause = new PauseState(this,input);
 
         gameplay.AddTransition(pause, () => Input.GetKeyDown(KeyCode.Escape));
         pause.AddTransition(gameplay, () => Input.GetKeyDown(KeyCode.Escape));

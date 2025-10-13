@@ -1,15 +1,20 @@
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseState : GameState
 {
-    public PauseState(GameManager manager) : base(manager){ }
-
-    public bool isPaused;
+    PlayerInput playerInput;
+    public PauseState(GameManager manager, PlayerInput input) : base(manager) 
+    { 
+        playerInput = input;
+    }
 
     public override void Enter()
     {
+        playerInput.SwitchCurrentActionMap("UI");
         Time.timeScale = 0f;
-        isPaused = true;
+
     }
 
     public override void Update()
@@ -19,6 +24,6 @@ public class PauseState : GameState
 
     public override void Exit()
     {
-        isPaused = false;
+        playerInput.SwitchCurrentActionMap("Player");
     }
 }
