@@ -1,38 +1,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<Item> items = new(); 
+    [SerializeField] private List<Item> items = new();
+
+    public InventorySlot[] slots = new InventorySlot[10];
 
     protected GameManager gameManager;
 
     private void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
-    }
 
-    public void AddItemToInventory(ItemData itemData, int amount = 1)
-    {
-        var existingItem = items.Find(i => i.data == itemData);
-        
-        if (existingItem == null) { return; }
-
-        items.Add(new Item(itemData, amount));
-
-    }
-
-    public void RemoveItemFromInventory(ItemData itemData, int amount = 1)
-    {
-        var existingItem = items.Find(i => i.data == itemData);
-
-        if (existingItem == null) { return; }
-
-        existingItem.amount =- amount;
-
-        if (existingItem.amount >= 0)
+        for (int i = 0; i < slots.Length; i++)
         {
-            items.Remove(existingItem);
+            if (slots[i] == null)
+                slots[i] = new InventorySlot();
         }
+    }
+
+    public bool IsAnySlotAvailable(InventorySlot[] slots)
+    {
+        if (slots == null)
+        {
+            return false;
+        }
+
+        foreach (InventorySlot slot in slots)
+        {
+            if (!slot.IsFilled())
+            {
+                return true;
+            } 
+        }
+        return false;
+    }
+
+    public InventorySlot GetEarliestAvailableSlot(InventorySlot[] slots)
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            if (!slot.IsFilled())
+                continue;
+            else
+            {
+                InventorySlot availableSlot = slot;
+                return availableSlot;
+            }
+        }
+        return null;
+
+    }
+    
+    public void AddItemToInventory(ItemData itemData, InventorySlot slot, int amount = 1)
+    {
+        var existingItem = items.Find(i => itemData);
+
+        items.Add(existingItem);
+        
+        slot.hasItem = true;
+
+    }
+
+    public void RemoveItemFromInventory(ItemData itemData, InventorySlot slot, int amount = 1)
+    {
+        var existingItem = items.Find(i => itemData);
+
+        if (existingItem == null) { return; }
+        
+        items.Remove(existingItem);
+        slot.hasItem = false;
+
     }
 }

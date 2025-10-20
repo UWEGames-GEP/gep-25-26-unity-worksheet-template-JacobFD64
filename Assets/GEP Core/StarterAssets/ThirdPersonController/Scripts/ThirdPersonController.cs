@@ -74,6 +74,9 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+        [Tooltip("Inventory")]
+        public Inventory inventory;
+        
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -109,6 +112,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+
 
         private bool IsCurrentDeviceMouse
         {
@@ -386,6 +390,29 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            }
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Item collisionItem = hit.gameObject.GetComponent<Item>();
+
+            if (collisionItem != null)
+            {
+                if (inventory.IsAnySlotAvailable(inventory.slots))
+                {
+                    foreach (InventorySlot slot in inventory.slots)
+                    {
+                        if (!slot.IsFilled())
+                        {
+                            inventory.AddItemToInventory(collisionItem.data, slot);
+                            break;
+                        }
+                        else
+                            continue;
+                    }
+                    Destroy(collisionItem.gameObject);
+                }
             }
         }
     }

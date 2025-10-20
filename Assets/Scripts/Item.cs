@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class Item
+public class Item : MonoBehaviour
 {
     public ItemData data;
-    public int amount;
-    
-    public Item (ItemData data, int amount)
+
+    public Item(ItemData data)
     {
         this.data = data;
-        this.amount = amount;
     }
 }
+    
+   
+    
