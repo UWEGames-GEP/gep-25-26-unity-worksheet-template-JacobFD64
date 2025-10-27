@@ -411,7 +411,7 @@ namespace StarterAssets
                         else
                             continue;
                     }
-                    Destroy(collisionItem.gameObject);
+                    collisionItem.Pickup();
                 }
             }
         }
