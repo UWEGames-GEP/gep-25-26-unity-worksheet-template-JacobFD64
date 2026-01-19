@@ -6,7 +6,7 @@ public class StateTransition
 {
     public GameState FromState { get; private set; }
     public GameState ToState { get; private set; }
-    public System.Func<bool> Condition { get; private set; }
+    public Func<bool> Condition { get; private set; }
 
     public StateTransition(GameState fromState, GameState toState, Func<bool> condition)
     {
@@ -27,7 +27,7 @@ public abstract class GameState
     public virtual void Enter() { }
     public virtual void Update() { }
     public virtual void Exit() { }
-    public void AddTransition(GameState targetState, System.Func<bool> condition)
+    public void AddTransition(GameState targetState, Func<bool> condition)
     {
         transitions.Add(new StateTransition(this, targetState, condition));
     }

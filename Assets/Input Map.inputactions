@@ -1,5 +1,5 @@
 {
-    "name": "StarterAssets",
+    "name": "Input Map",
     "maps": [
         {
             "name": "Player",
@@ -36,6 +36,15 @@
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "980e881e-182c-404c-8cbf-3d09fdb48fef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "df268fd2-71ae-41f9-b8f1-c3da743f6e56",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -218,6 +227,17 @@
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6a7df2b-40d3-4daa-906a-0a63c7f528a2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -226,7 +246,7 @@
             "id": "e4361e66-2771-4870-95d0-eb0009a02ee8",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Resume",
                     "type": "Button",
                     "id": "155acbc4-c1a5-47cb-ab24-2d1cec7ce0c8",
                     "expectedControlType": "",
@@ -239,11 +259,11 @@
                 {
                     "name": "",
                     "id": "40db72f9-42da-42ec-a457-8243fcbc6e79",
-                    "path": "",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": ";KeyboardMouse",
+                    "action": "Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

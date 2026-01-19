@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<Item> items = new();
+    [SerializeField] private List<ItemData> items = new();
 
     public InventorySlot[] slots = new InventorySlot[10];
 
@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
     
     public void AddItemToInventory(ItemData itemData, InventorySlot slot, int amount = 1)
     {
-        var existingItem = items.Find(i => itemData);
+        var existingItem = itemData;
 
         items.Add(existingItem);
         
@@ -65,7 +65,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromInventory(ItemData itemData, InventorySlot slot, int amount = 1)
     {
-        var existingItem = items.Find(i => itemData);
+        var existingItem = itemData;
 
         if (existingItem == null) { return; }
         

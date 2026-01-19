@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.InputSystem;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
 public class GameManager : MonoBehaviour
@@ -8,16 +10,22 @@ public class GameManager : MonoBehaviour
 
     public GameState currentState => currentGameState;
 
-    public PlayerInput input;
+    public PlayerCharacterContoller characterController;
 
+    [SerializeField] private InputReader input;
+
+    bool paused;
 
     private void Start()
     {
         var gameplay = new GameplayState(this);
-        var pause = new PauseState(this,input);
+        var pause = new PauseState(this);
 
-        gameplay.AddTransition(pause, () => Input.GetKeyDown(KeyCode.Escape));
-        pause.AddTransition(gameplay, () => Input.GetKeyDown(KeyCode.Escape));
+        input.PauseEvent += HandlePause;
+        input.ResumeEvent += HandleResume;
+
+        pause.AddTransition(gameplay, () => !isPaused());
+        gameplay.AddTransition(pause, () => isPaused());
 
         currentGameState = gameplay;
 
@@ -38,4 +46,17 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
         currentGameState?.Enter();
     }
+
+    private void HandlePause()
+    {
+        paused = true;
+        Debug.Log("Pause Game.");
+    }
+
+    private void HandleResume()
+    {
+        paused = false;
+        Debug.Log("Resume Game.");
+    }
+    private bool isPaused() => paused;
 }

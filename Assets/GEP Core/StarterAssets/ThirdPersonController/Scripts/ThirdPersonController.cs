@@ -406,12 +406,12 @@ namespace StarterAssets
                         if (!slot.IsFilled())
                         {
                             inventory.AddItemToInventory(collisionItem.data, slot);
+                            collisionItem.Pickup();
                             break;
                         }
                         else
                             continue;
                     }
-                    collisionItem.Pickup();
                 }
             }
         }

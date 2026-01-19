@@ -5,12 +5,6 @@ public class ItemData : ScriptableObject
 {
     public string itemName => name;
 
-    public MeshRenderer meshRenderer;
-
-    public BoxCollider collider;
-
-    public ParticleSystem particleSystem;
-
     public enum category
     {
         Sword,

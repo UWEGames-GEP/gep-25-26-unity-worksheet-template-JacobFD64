@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 
 public class PauseState : GameState
 {
-    PlayerInput playerInput;
-    public PauseState(GameManager manager, PlayerInput input) : base(manager) 
+    //public PlayerInput playerInput;
+    public PauseState(GameManager manager) : base(manager) 
     { 
-        playerInput = input;
+        //playerInput = input;
     }
 
     public override void Enter()
     {
-        playerInput.SwitchCurrentActionMap("UI");
+        //playerInput.SwitchCurrentActionMap("UI");
         Time.timeScale = 0f;
 
     }
@@ -24,6 +24,6 @@ public class PauseState : GameState
 
     public override void Exit()
     {
-        playerInput.SwitchCurrentActionMap("Player");
+        //playerInput.SwitchCurrentActionMap("Player");
     }
 }
