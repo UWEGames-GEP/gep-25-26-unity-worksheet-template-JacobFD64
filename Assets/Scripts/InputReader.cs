@@ -21,6 +21,11 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
         }
     }
 
+    private void OnDisable()
+    {
+        input.Player.Disable();
+    }
+
     public void setGameplay()
     {
         input.Player.Enable();
@@ -35,6 +40,8 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
+
+    public event Action RemoveItemEvent;
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -71,6 +78,14 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
         {
             ResumeEvent?.Invoke();
             setGameplay();
+        }
+    }
+
+    public void OnRemoveItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            RemoveItemEvent?.Invoke();
         }
     }
 }

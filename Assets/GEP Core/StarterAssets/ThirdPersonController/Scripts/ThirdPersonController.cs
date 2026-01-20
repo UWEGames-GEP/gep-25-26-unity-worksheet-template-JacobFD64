@@ -405,7 +405,7 @@ namespace StarterAssets
                     {
                         if (!slot.IsFilled())
                         {
-                            inventory.AddItemToInventory(collisionItem.data, slot);
+                            inventory.AddItemToInventory(collisionItem, slot);
                             collisionItem.Pickup();
                             break;
                         }

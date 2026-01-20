@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private InputReader input;
 
+    [SerializeField] private GameObject InventoryUI;
+
     bool paused;
 
     private void Start()
     {
-        var gameplay = new GameplayState(this);
-        var pause = new PauseState(this);
+        var gameplay = new GameplayState(this, InventoryUI);
+        var pause = new PauseState(this, characterController);
 
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
         pause.AddTransition(gameplay, () => !isPaused());
         gameplay.AddTransition(pause, () => isPaused());
 
-        currentGameState = gameplay;
+        ChangeState(gameplay);
 
     }
     private void Update()

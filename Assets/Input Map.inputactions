@@ -253,6 +253,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Remove Item",
+                    "type": "Button",
+                    "id": "bef97714-3e7a-4cc1-b742-063971449471",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -264,6 +273,17 @@
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e1788d6-4b29-4554-8324-d66f32fa6840",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Remove Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

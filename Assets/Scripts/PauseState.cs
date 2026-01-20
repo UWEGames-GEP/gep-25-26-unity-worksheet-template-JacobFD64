@@ -1,20 +1,21 @@
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PauseState : GameState
 {
-    //public PlayerInput playerInput;
-    public PauseState(GameManager manager) : base(manager) 
-    { 
-        //playerInput = input;
-    }
+    ThirdPersonController controller;
 
+    public PauseState(GameManager manager, ThirdPersonController controller) : base(manager) 
+    {
+        this.controller = controller;
+    }
     public override void Enter()
     {
-        //playerInput.SwitchCurrentActionMap("UI");
         Time.timeScale = 0f;
-
+        controller.LockCameraPosition = true;
     }
 
     public override void Update()
@@ -24,6 +25,6 @@ public class PauseState : GameState
 
     public override void Exit()
     {
-        //playerInput.SwitchCurrentActionMap("Player");
+        controller.LockCameraPosition = false;
     }
 }

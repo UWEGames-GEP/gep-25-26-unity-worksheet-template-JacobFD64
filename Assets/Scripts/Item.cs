@@ -28,6 +28,12 @@ public class Item : MonoBehaviour
         meshRenderer.enabled = false;
         particleSystem.Play();
     }
+
+    public void Drop()
+    {
+        collider.enabled = true;
+        meshRenderer.enabled = true;
+    }
 }
     
    
