@@ -5,12 +5,17 @@ public class ItemData : ScriptableObject
 {
     public string itemName => name;
 
+    public GameObject itemPrefab;
+
     public enum category
     {
         Sword,
         Shield,
         Helmet,
-        Boots
+        Boots,
+        Gem,
+        Potion,
+        Misc
     }
 
     public category itemCategory;

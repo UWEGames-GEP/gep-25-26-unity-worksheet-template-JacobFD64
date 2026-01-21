@@ -7,8 +7,6 @@ public class Item : MonoBehaviour
     private MeshRenderer meshRenderer;
 
     private BoxCollider collider;
-    
-    private ParticleSystem particleSystem;
 
     public Item(ItemData data)
     {
@@ -19,14 +17,12 @@ public class Item : MonoBehaviour
     {
         collider = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
-        particleSystem = GetComponent<ParticleSystem>();
     }
 
     public void Pickup()
     {
         collider.enabled = false;
         meshRenderer.enabled = false;
-        particleSystem.Play();
     }
 
     public void Drop()

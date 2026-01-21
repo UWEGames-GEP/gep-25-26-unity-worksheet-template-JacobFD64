@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameplayState : GameState
 {
-    GameObject InventoryUI;
+    private GameObject InventoryUI;
     public GameplayState(GameManager manager,GameObject InventoryUI) : base(manager)
     {
         this.InventoryUI = InventoryUI;

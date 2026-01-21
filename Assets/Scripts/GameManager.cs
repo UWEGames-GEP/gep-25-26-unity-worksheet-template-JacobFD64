@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameState currentState => currentGameState;
 
-    public PlayerCharacterContoller characterController;
+    [SerializeField] private PlayerCharacterController characterController;
 
     [SerializeField] private InputReader input;
 

@@ -392,28 +392,5 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-
-        private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            Item collisionItem = hit.gameObject.GetComponent<Item>();
-
-            if (collisionItem != null)
-            {
-                if (inventory.IsAnySlotAvailable(inventory.slots))
-                {
-                    foreach (InventorySlot slot in inventory.slots)
-                    {
-                        if (!slot.IsFilled())
-                        {
-                            inventory.AddItemToInventory(collisionItem, slot);
-                            collisionItem.Pickup();
-                            break;
-                        }
-                        else
-                            continue;
-                    }
-                }
-            }
-        }
     }
 }

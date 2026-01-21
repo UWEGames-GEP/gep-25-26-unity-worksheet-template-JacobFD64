@@ -6,16 +6,16 @@ using System.Collections.Generic;
 
 public class PauseState : GameState
 {
-    ThirdPersonController controller;
+    private PlayerCharacterController controller;
 
-    public PauseState(GameManager manager, ThirdPersonController controller) : base(manager) 
+    public PauseState(GameManager manager, PlayerCharacterController controller) : base(manager) 
     {
         this.controller = controller;
     }
     public override void Enter()
     {
         Time.timeScale = 0f;
-        controller.LockCameraPosition = true;
+        controller.lockCamera(true);
     }
 
     public override void Update()
@@ -25,6 +25,6 @@ public class PauseState : GameState
 
     public override void Exit()
     {
-        controller.LockCameraPosition = false;
+        controller.lockCamera(false);
     }
 }

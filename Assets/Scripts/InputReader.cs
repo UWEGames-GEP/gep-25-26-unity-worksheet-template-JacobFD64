@@ -6,7 +6,7 @@ using System;
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.IUIActions
 {
-    InputMap input;
+    private InputMap input;
 
     private void OnEnable()
     {
@@ -26,13 +26,13 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
         input.Player.Disable();
     }
 
-    public void setGameplay()
+    private void setGameplay()
     {
         input.Player.Enable();
         input.UI.Disable();
     }
 
-    public void setUI()
+    private void setUI()
     {
         input.Player.Disable();
         input.UI.Enable();
