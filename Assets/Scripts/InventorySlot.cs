@@ -5,8 +5,14 @@ public class InventorySlot
 {
     private ItemData itemData;
 
+    private InventoryUISlot slot;
+
     public bool hasItem;
 
+    InventorySlot (InventoryUISlot UI)
+    {
+        slot = UI;
+    }
     public void AddItemToSlot(ItemData item)
     {
         

@@ -7,12 +7,9 @@ public abstract class Inventory : MonoBehaviour
     private List<Item> items = new();
 
     public List<Item> Items => items;
-    
-    private GameManager gameManager;
 
     private void Start()
     {
-        gameManager = FindAnyObjectByType<GameManager>();
 
     }
 
@@ -21,8 +18,6 @@ public abstract class Inventory : MonoBehaviour
         var existingItem = item;
 
         items.Add(existingItem);
-
-        items.Sort((a,b) => string.Compare(a.name,b.name));
 
     }
 
@@ -44,8 +39,6 @@ public abstract class Inventory : MonoBehaviour
         existingItem.Drop();
 
         items.Remove(existingItem);
-
-        items.Sort((a, b) => string.Compare(a.name, b.name));
 
     }
 

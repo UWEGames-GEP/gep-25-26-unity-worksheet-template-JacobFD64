@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
 using UnityEngine.UI;
@@ -7,16 +8,23 @@ public class InventoryUI : MonoBehaviour
 {
     public PlayerInventory inventory;
 
-    public List<GameObject> inventoryUIButtons = new List<GameObject>();
+    public List<InventoryUISlot> inventoryUISlots = new List<InventoryUISlot>();
 
+    private void OnValidate()
+    {
+        inventoryUISlots.Clear();
+
+        InventoryUISlot[] slots = GetComponentsInChildren<InventoryUISlot>();
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            inventoryUISlots.Add(slots[i]);
+        }
+
+    }
     private void Awake()
     {
-        inventoryUIButtons.Clear();
 
-        foreach (Transform child in transform)
-        {
-            inventoryUIButtons.Add(child.gameObject);
-        }
     }
     private void Start()
     {
@@ -34,22 +42,7 @@ public class InventoryUI : MonoBehaviour
 
     private void RefreshInventory()
     {
-        foreach (var button in inventoryUIButtons)
-        {
-            button.SetActive(false);
-        }
 
-        for (int i = 0; i < inventory.Items.Count; i++)
-        {
-            if (i < inventoryUIButtons.Count)
-            {
-                InventoryUIButton button = inventoryUIButtons[i].GetComponent<InventoryUIButton>();
-                Item item = inventory.Items[i];
-
-                button.gameObject.SetActive(true);
-                button.SetButton(item);
-            }
-        }
     }
 
     public void OnInventoryUIButton(int i)

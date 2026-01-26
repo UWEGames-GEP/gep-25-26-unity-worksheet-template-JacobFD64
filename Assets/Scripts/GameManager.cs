@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        var gameplay = new GameplayState(this, InventoryUI);
-        var pause = new PauseState(this, characterController);
+        var gameplay = new GameplayState(InventoryUI);
+        var pause = new PauseState(characterController);
 
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;

@@ -17,12 +17,7 @@ public class StateTransition
 }
 public abstract class GameState
 {
-    protected GameManager gameManager;
     private readonly List<StateTransition> transitions = new();
-    public GameState(GameManager manager)
-    {
-        gameManager = manager;
-    }
     
     public virtual void Enter() { }
     public virtual void Update() { }

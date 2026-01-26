@@ -8,7 +8,7 @@ public class PauseState : GameState
 {
     private PlayerCharacterController controller;
 
-    public PauseState(GameManager manager, PlayerCharacterController controller) : base(manager) 
+    public PauseState(PlayerCharacterController controller)
     {
         this.controller = controller;
     }
