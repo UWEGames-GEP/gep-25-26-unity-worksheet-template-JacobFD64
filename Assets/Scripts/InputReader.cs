@@ -41,7 +41,7 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
     public event Action PauseEvent;
     public event Action ResumeEvent;
 
-    public event Action RemoveItemEvent;
+    public event Action DropItemEvent;
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -85,7 +85,7 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            RemoveItemEvent?.Invoke();
+            DropItemEvent?.Invoke();
         }
     }
 }

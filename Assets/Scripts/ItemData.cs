@@ -7,6 +7,13 @@ public class ItemData : ScriptableObject
 
     public GameObject itemPrefab;
 
+    public int horizontalSlots;
+
+    public int verticalSlots;
+
+    public Sprite icon;
+
+
     public enum category
     {
         Sword,

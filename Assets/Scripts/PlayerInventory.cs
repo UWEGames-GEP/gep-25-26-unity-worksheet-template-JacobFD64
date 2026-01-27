@@ -16,7 +16,7 @@ public class PlayerInventory : Inventory
 
     private void Start()
     {
-        input.RemoveItemEvent += HandleDropItem;
+        input.DropItemEvent += HandleDropItem;
         controller.CollideWithItemEvent += HandleItemCollision;
 
     }

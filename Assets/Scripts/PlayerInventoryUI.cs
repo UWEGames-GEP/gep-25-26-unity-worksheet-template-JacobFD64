@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class PlayerInventoryUI : MonoBehaviour
 {
     public PlayerInventory inventory;
 
     public List<InventoryUISlot> inventoryUISlots = new List<InventoryUISlot>();
+
+    public List<GameObject> itemUIs = new List<GameObject>();
 
     private void OnValidate()
     {
@@ -29,9 +32,7 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         inventory.RemoveItemEvent += HandleRemoveItem;
-
-
-        
+        inventory.PickUpItemEvent += HandlePickUpItem;
     }
     private void OnEnable()
     {
@@ -54,5 +55,13 @@ public class InventoryUI : MonoBehaviour
     public void HandleRemoveItem()
     {
         RefreshInventory();
+    }
+
+    private void HandlePickUpItem(Item item)
+    {
+        Debug.Log("picked");
+        //GameObject itemUI = Instantiate
+
+        //itemUIs.Add(itemUI);
     }
 }

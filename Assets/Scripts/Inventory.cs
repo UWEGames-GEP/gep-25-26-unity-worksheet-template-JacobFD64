@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -7,6 +8,8 @@ public abstract class Inventory : MonoBehaviour
     private List<Item> items = new();
 
     public List<Item> Items => items;
+
+    public event Action <Item>PickUpItemEvent;
 
     private void Start()
     {
@@ -18,6 +21,8 @@ public abstract class Inventory : MonoBehaviour
         var existingItem = item;
 
         items.Add(existingItem);
+
+        PickUpItemEvent?.Invoke(item);
 
     }
 
