@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ItemData_Amethyst
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 6910945612668219229, guid: 90c4572ce8f5e444b99b0a2727c92688, type: 3}
+  horizontalSlots: 1
+  verticalSlots: 1
+  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
   itemCategory: 0

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ItemData_GreenPotion
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 6910945612668219229, guid: 73ed3c2f951a540449e290bc5893b67f, type: 3}
+  horizontalSlots: 1
+  verticalSlots: 2
+  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
   itemCategory: 0

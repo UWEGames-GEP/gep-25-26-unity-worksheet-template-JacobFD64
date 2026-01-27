@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ItemData_Trophy
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 6910945612668219229, guid: dfe64866ed2304b4b9d3d837b43e3769, type: 3}
+  horizontalSlots: 2
+  verticalSlots: 2
+  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
   itemCategory: 6

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ItemData_Emerald
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 6910945612668219229, guid: 1a43682ce700376418c4baf2d39e0c54, type: 3}
+  horizontalSlots: 1
+  verticalSlots: 1
+  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
   itemCategory: 4

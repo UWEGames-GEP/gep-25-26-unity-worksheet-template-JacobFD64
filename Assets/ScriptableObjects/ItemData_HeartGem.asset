@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ItemData_HeartGem
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 6910945612668219229, guid: ce0243bb55254cd49888c16679ae6098, type: 3}
+  horizontalSlots: 1
+  verticalSlots: 1
+  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
   itemCategory: 4
