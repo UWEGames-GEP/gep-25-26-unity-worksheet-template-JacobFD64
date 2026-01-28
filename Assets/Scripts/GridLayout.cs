@@ -178,6 +178,12 @@ public class GridLayout : LayoutGroup
 
     }
 
+    public void GetXY(Vector3 worldPosition, out int x, out int y )
+    {
+        x = Mathf.FloorToInt(worldPosition.x / cellSize.x);
+        y = Mathf.FloorToInt(worldPosition.y / cellSize.y);
+    }
+
     public override void SetLayoutHorizontal()
     {
 

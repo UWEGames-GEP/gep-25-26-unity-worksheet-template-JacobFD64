@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class GameplayState : GameState
 {
-    private GameObject InventoryUI;
-    public GameplayState(GameObject InventoryUI)
-    {
-        this.InventoryUI = InventoryUI;
-    }
+
+    
 
     public override void Enter()
     {
         Time.timeScale = 1.0f;
-        InventoryUI.SetActive(false);
+        
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -21,7 +18,7 @@ public class GameplayState : GameState
     }
     public override void Exit()
     {
-        InventoryUI.SetActive(true);
+        
         Cursor.lockState = CursorLockMode.None;
     }
 

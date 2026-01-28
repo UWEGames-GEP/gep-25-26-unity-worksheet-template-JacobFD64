@@ -348,6 +348,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drag Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""0334e5a6-9ce0-4139-9e45-4946fa742498"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -370,6 +379,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Remove Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b91c3a05-d504-4d4e-a622-94b82910af4c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drag Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -437,6 +457,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
         m_UI_RemoveItem = m_UI.FindAction("Remove Item", throwIfNotFound: true);
+        m_UI_DragItem = m_UI.FindAction("Drag Item", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -660,6 +681,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Resume;
     private readonly InputAction m_UI_RemoveItem;
+    private readonly InputAction m_UI_DragItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -679,6 +701,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/RemoveItem".
         /// </summary>
         public InputAction @RemoveItem => m_Wrapper.m_UI_RemoveItem;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/DragItem".
+        /// </summary>
+        public InputAction @DragItem => m_Wrapper.m_UI_DragItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -711,6 +737,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @RemoveItem.started += instance.OnRemoveItem;
             @RemoveItem.performed += instance.OnRemoveItem;
             @RemoveItem.canceled += instance.OnRemoveItem;
+            @DragItem.started += instance.OnDragItem;
+            @DragItem.performed += instance.OnDragItem;
+            @DragItem.canceled += instance.OnDragItem;
         }
 
         /// <summary>
@@ -728,6 +757,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @RemoveItem.started -= instance.OnRemoveItem;
             @RemoveItem.performed -= instance.OnRemoveItem;
             @RemoveItem.canceled -= instance.OnRemoveItem;
+            @DragItem.started -= instance.OnDragItem;
+            @DragItem.performed -= instance.OnDragItem;
+            @DragItem.canceled -= instance.OnDragItem;
         }
 
         /// <summary>
@@ -877,5 +909,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRemoveItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drag Item" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDragItem(InputAction.CallbackContext context);
     }
 }

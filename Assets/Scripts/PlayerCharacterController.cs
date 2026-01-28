@@ -10,18 +10,11 @@ public class PlayerCharacterController : ThirdPersonController
 
     public event Action<Item> CollideWithItemEvent;
 
-    public void lockCamera(bool islocked)
+    protected override void Awake()
     {
-        if (islocked)
-        {
-            LockCameraPosition = true;
-        }
-        else
-        {
-            LockCameraPosition = false;
-        }
+        base.Awake(); 
+        GameManager.instance.OnStateChangedEvent += HandleStateChange;
     }
-
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Item collisionItem = hit.gameObject.GetComponent<Item>();
@@ -29,6 +22,18 @@ public class PlayerCharacterController : ThirdPersonController
         if (collisionItem != null)
         {
             CollideWithItemEvent?.Invoke(collisionItem);
+        }
+    }
+    
+    private void HandleStateChange(GameState state)
+    {
+        if (state is GameplayState)
+        {
+            LockCameraPosition = false;
+        }
+        else if (state is PauseState)
+        {
+            LockCameraPosition = true;
         }
     }
 

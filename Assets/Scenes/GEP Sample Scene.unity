@@ -2746,6 +2746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1574334012}
   - component: {fileID: 1574334013}
+  - component: {fileID: 1574334014}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2805,6 +2806,18 @@ MonoBehaviour:
   - {fileID: 878576484}
   itemUIs: []
   itemUIPrefab: {fileID: 1647074664551190160, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
+--- !u!225 &1574334014
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574334011}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1642659877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4177,11 +4190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 221.5
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 221.5
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4213,11 +4226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 626
+      value: 655
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.999996
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 258994901721875782, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

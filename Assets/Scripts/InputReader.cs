@@ -6,6 +6,8 @@ using System;
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.IUIActions
 {
+    public static InputReader instance;
+
     private InputMap input;
 
     private void OnEnable()
@@ -19,6 +21,8 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
 
             setGameplay();
         }
+
+        instance = this;
     }
 
     private void OnDisable()
@@ -42,6 +46,9 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
     public event Action ResumeEvent;
 
     public event Action DropItemEvent;
+
+    public event Action MoveItemEvent;
+    public event Action StopMoveItemEvent;
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -86,6 +93,18 @@ public class InputReader : ScriptableObject, InputMap.IPlayerActions, InputMap.I
         if (context.phase == InputActionPhase.Performed)
         {
             DropItemEvent?.Invoke();
+        }
+    }
+
+    public void OnDragItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            MoveItemEvent?.Invoke();
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            StopMoveItemEvent?.Invoke();
         }
     }
 }

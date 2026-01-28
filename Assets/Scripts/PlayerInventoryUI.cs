@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class PlayerInventoryUI : MonoBehaviour
 
     public GameObject itemUIPrefab;
 
+    private CanvasGroup group;
+
     private void OnValidate()
     {
         inventoryUISlots.Clear();
@@ -29,12 +32,20 @@ public class PlayerInventoryUI : MonoBehaviour
     }
     private void Awake()
     {
+        GameManager.instance.OnStateChangedEvent += HandleStateChanged;
 
+        group = GetComponent<CanvasGroup>();
     }
     private void Start()
     {
         inventory.RemoveItemEvent += HandleRemoveItem;
         inventory.PickUpItemEvent += HandlePickUpItem;
+
+    }
+
+    private void Update()
+    {
+        
     }
     private void OnEnable()
     {
@@ -61,12 +72,30 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void HandlePickUpItem(Item item)
     {
-        Debug.Log("picked");
-
         GameObject itemUI = Instantiate(itemUIPrefab, transform);
 
-        itemUI.GetComponent<ItemUI>().setItem(item);
+        ItemUI ui = itemUI.GetComponent<ItemUI>();
+
+        ui.grid = GetComponentInChildren<GridLayout>();
+
+        ui.setItem(item);
 
         itemUIs.Add(itemUI);
     }
+
+    private void HandleStateChanged(GameState state)
+    {
+        if (state is GameplayState)
+        {
+            group.alpha = 0;
+        }
+        else if (state is PauseState)
+        {
+            group.alpha = 1;
+        }
+
+        Debug.Log("State Changed");
+    }
+
+   
 }

@@ -12,10 +12,13 @@ public class InventoryUISlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private Image image;
 
+    private void Awake()
+    {
+    }
     private void Start()
     {
-
         image = GetComponent<Image>();
+
     }
     public void SetButton(Item item)
     {

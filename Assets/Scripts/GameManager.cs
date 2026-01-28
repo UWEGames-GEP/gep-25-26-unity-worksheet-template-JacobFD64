@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -6,25 +7,27 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { get; private set; } 
+    
     private GameState currentGameState;
 
     public GameState currentState => currentGameState;
 
-    [SerializeField] private PlayerCharacterController characterController;
-
-    [SerializeField] private InputReader input;
-
-    [SerializeField] private GameObject InventoryUI;
-
     bool paused;
 
+    public event Action<GameState> OnStateChangedEvent;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
-        var gameplay = new GameplayState(InventoryUI);
-        var pause = new PauseState(characterController);
+        var gameplay = new GameplayState();
+        var pause = new PauseState();
 
-        input.PauseEvent += HandlePause;
-        input.ResumeEvent += HandleResume;
+        InputReader.instance.PauseEvent += HandlePause;
+        InputReader.instance.ResumeEvent += HandleResume;
 
         pause.AddTransition(gameplay, () => !isPaused());
         gameplay.AddTransition(pause, () => isPaused());
@@ -46,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState?.Exit();
         currentGameState = newState;
+        OnStateChangedEvent?.Invoke(newState);
         currentGameState?.Enter();
     }
 
