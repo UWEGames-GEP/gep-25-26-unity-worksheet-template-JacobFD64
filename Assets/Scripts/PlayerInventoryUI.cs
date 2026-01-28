@@ -13,6 +13,8 @@ public class PlayerInventoryUI : MonoBehaviour
 
     public List<GameObject> itemUIs = new List<GameObject>();
 
+    public GameObject itemUIPrefab;
+
     private void OnValidate()
     {
         inventoryUISlots.Clear();
@@ -60,8 +62,11 @@ public class PlayerInventoryUI : MonoBehaviour
     private void HandlePickUpItem(Item item)
     {
         Debug.Log("picked");
-        //GameObject itemUI = Instantiate
 
-        //itemUIs.Add(itemUI);
+        GameObject itemUI = Instantiate(itemUIPrefab, transform);
+
+        itemUI.GetComponent<ItemUI>().setItem(item);
+
+        itemUIs.Add(itemUI);
     }
 }

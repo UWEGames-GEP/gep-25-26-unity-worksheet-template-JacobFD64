@@ -2804,6 +2804,7 @@ MonoBehaviour:
   - {fileID: 1365973431}
   - {fileID: 878576484}
   itemUIs: []
+  itemUIPrefab: {fileID: 1647074664551190160, guid: 0f13e9fcab9d8bc4bab31d06fd2d230f, type: 3}
 --- !u!1001 &1642659877
 PrefabInstance:
   m_ObjectHideFlags: 0

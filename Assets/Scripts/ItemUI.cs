@@ -15,6 +15,10 @@ public class ItemUI : MonoBehaviour
 
     private Item item;
 
+    private void OnEnable()
+    {
+        
+    }
     private void Start()
     {
         //item.data.icon.rect.Set(1,1,item.data.horizontalSlots,item.data.verticalSlots);
@@ -24,7 +28,7 @@ public class ItemUI : MonoBehaviour
         item = newItem;
 
         iconImage.sprite = item.data.icon;
-        textImage.text = item.name;
+        //textImage.text = item.name;
     }
 
 }
