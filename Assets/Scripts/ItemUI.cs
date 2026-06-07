@@ -47,7 +47,6 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         iconImage.sprite = item.data.icon;
 
-
         float imageWidth = (grid.cellSize.x * item.data.horizontalSlots) + (grid.spacing.x * item.data.horizontalSlots) - grid.spacing.x;
         float imageHeight = (grid.cellSize.y * item.data.verticalSlots) + (grid.spacing.y * item.data.verticalSlots) - grid.spacing.y;
 

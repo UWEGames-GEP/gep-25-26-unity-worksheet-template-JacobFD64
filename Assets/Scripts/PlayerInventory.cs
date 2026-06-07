@@ -29,8 +29,24 @@ public class PlayerInventory : Inventory
 
     private void HandleItemCollision(Item item)
     {
-        AddItemToInventory(item);
-        item.Pickup();
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (!slots[i].hasItem)
+            {
+                for(int j = 0; j < item.data.horizontalSlots; j++)
+                {
+                    for (int k = 0; k < item.data.verticalSlots; k++)
+                    {
+                        if (slots[i * k + j].hasItem)
+                        {
+                            return;
+                        }
+                    }
+                }
+                AddItemToInventory(item);
+                item.Pickup();
+            }
+        }
     }
     protected void HandleDropItem()
     {

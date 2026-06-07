@@ -15,5 +15,5 @@ MonoBehaviour:
   itemPrefab: {fileID: 6910945612668219229, guid: 1a43682ce700376418c4baf2d39e0c54, type: 3}
   horizontalSlots: 1
   verticalSlots: 1
-  icon: {fileID: 21300000, guid: dd142256244605a4b8df3cf160ec61da, type: 3}
+  icon: {fileID: 21300000, guid: 73f905fe40a552d46a17f41d1cd5e879, type: 3}
   itemCategory: 4

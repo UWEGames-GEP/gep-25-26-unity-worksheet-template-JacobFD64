@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 
     private MeshRenderer meshRenderer;
 
-    private BoxCollider collider;
+    private new BoxCollider collider;
 
     public Item(ItemData data)
     {
