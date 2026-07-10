@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -10,9 +11,9 @@ public class PlayerInventoryUI : MonoBehaviour
 {
     public PlayerInventory inventory;
 
-    public List<InventoryUISlot> inventoryUISlots = new List<InventoryUISlot>();
+    private List<InventoryUISlot> inventoryUISlots = new List<InventoryUISlot>();
 
-    public List<GameObject> itemUIs = new List<GameObject>();
+    public List<ItemUI> itemUIs = new List<ItemUI>();
 
     public GameObject itemUIPrefab;
 
@@ -38,39 +39,15 @@ public class PlayerInventoryUI : MonoBehaviour
     }
     private void Start()
     {
-        inventory.RemoveItemEvent += HandleRemoveItem;
-        inventory.PickUpItemEvent += HandlePickUpItem;
+        inventory.PickUpItemToSlotEvent += HandlePickUpItem;
 
     }
-
     private void Update()
     {
-        
-    }
-    private void OnEnable()
-    {
-        RefreshInventory();
-
-        
+        itemUIs.RemoveAll(item => item == null);
     }
 
-    private void RefreshInventory()
-    {
-
-    }
-
-    public void OnInventoryUIButton(int i)
-    {
-        inventory.RemoveItemFromInventory(i);
-        RefreshInventory();
-    }
-
-    public void HandleRemoveItem()
-    {
-        RefreshInventory();
-    }
-
-    private void HandlePickUpItem(Item item)
+    private void HandlePickUpItem(Item item, int slot_index)
     {
         GameObject itemUI = Instantiate(itemUIPrefab, transform);
 
@@ -78,9 +55,20 @@ public class PlayerInventoryUI : MonoBehaviour
 
         ui.grid = GetComponentInChildren<GridLayout>();
 
+        ui.inv = inventory;
+
+        ui.currentSlotIndex = slot_index;
+
         ui.setItem(item);
 
-        itemUIs.Add(itemUI);
+        ui.MoveItemEvent += HandleMoveItem;
+
+        float imageStartPositionx = inventoryUISlots[slot_index].transform.position.x;
+        float imageStartPositiony = inventoryUISlots[slot_index].transform.position.y;
+
+        ui.rect.transform.position = new Vector2(imageStartPositionx, imageStartPositiony);
+
+        itemUIs.Add(itemUI.GetComponent<ItemUI>());
     }
 
     private void HandleStateChanged(GameState state)
@@ -93,8 +81,14 @@ public class PlayerInventoryUI : MonoBehaviour
         {
             group.alpha = 1;
         }
+    }
 
-        Debug.Log("State Changed");
+    private void HandleMoveItem(int index, ItemUI ui)
+    {
+        float imageStartPositionx = inventoryUISlots[index].transform.position.x;
+        float imageStartPositiony = inventoryUISlots[index].transform.position.y;
+
+        ui.rect.transform.position = new Vector2(imageStartPositionx, imageStartPositiony);
     }
 
    

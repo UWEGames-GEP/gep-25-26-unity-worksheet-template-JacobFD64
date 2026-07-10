@@ -3,30 +3,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
+using System.Text.RegularExpressions;
 
 public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image iconImage;
 
-    public Text textImage;
-
     public GridLayout grid;
 
-    private int area;
+    public int currentSlotIndex;
 
-    [SerializeField] private Item item;
+    public PlayerInventory inv;
+
+    public Item item;
 
     public RectTransform rect;
 
-    bool hovering;
+    public bool hovering;
 
-    bool holdingitem;
+    public bool holdingitem;
+    
+    public bool toBeRemoved;
 
     private Vector3 offset;
 
-    private void OnEnable()
-    {
-    }
+    private Vector3 startingPosition;
+
+    private Vector2 localPosition;
+
+    public Action<int, ItemUI> MoveItemEvent { get; internal set; }
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -34,6 +41,17 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         InputReader.instance.MoveItemEvent += HandleMoveItem;
         InputReader.instance.StopMoveItemEvent += HandleStopMoveItem;
     }
+
+    private void HandleRemoveItem(Item target_item)
+    {
+        if (target_item == item)
+        {
+            toBeRemoved = true;
+            Destroy(gameObject);
+            target_item = null;
+        }
+    }
+
     private void Update()
     {
         if (holdingitem)
@@ -53,6 +71,8 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         rect.sizeDelta = new Vector2(imageWidth, imageHeight);
 
         rect.pivot = new Vector2(0, 1);
+
+        inv.RemoveItemEvent += HandleRemoveItem;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -70,27 +90,49 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (hovering)
         {
             holdingitem = true;
+            iconImage.raycastTarget = false;
+            transform.SetAsLastSibling();
             CalculateOffset();
+            startingPosition = transform.position;
         }
     }
     private void HandleStopMoveItem()
     {
         if (holdingitem)
         {
-            grid.GetXY(Input.mousePosition, out int x, out int y);
+            iconImage.raycastTarget = true;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(grid.getRectTransform(), transform.position, null, out localPosition);
+            grid.GetXY(localPosition, out int x, out int y);
 
-            Debug.Log(x + " " + y);
-
-            //transform.position = new Vector2(x, y);
+            if (x >= grid.columns || x < 0 || y >= grid.rows || y < 0)
+            {
+                transform.position = startingPosition;
+                holdingitem = false;
+                return;
+            }
+            int index = x + y * grid.columns;
+            inv.RemoveItemFromSlot(item, currentSlotIndex);
+            if (inv.checkSurroundingSlots(index, item, grid))
+            {
+                inv.AddItemToSlot(item, index);
+                currentSlotIndex = index;
+                MoveItemEvent?.Invoke(index, this);
+            }
+            else
+            {
+                inv.AddItemToSlot(item, currentSlotIndex);
+                transform.position = startingPosition;
+            }
         }
-
-        
 
         holdingitem = false;
     }
-    
     private void CalculateOffset()
     {
         offset = iconImage.transform.position - Input.mousePosition;
+    }
+    private void OnDestroy()
+    {
+        inv.RemoveItemEvent -= HandleRemoveItem;
     }
 }

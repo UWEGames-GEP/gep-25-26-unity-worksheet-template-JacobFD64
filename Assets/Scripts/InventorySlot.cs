@@ -1,5 +1,4 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEngine;
+
 
 public class InventorySlot
 {
@@ -9,10 +8,11 @@ public class InventorySlot
 
     public bool hasItem;
 
-    InventorySlot (InventoryUISlot UI)
-    {
-        slot = UI;
-    }
+    public int x;
+
+    public int y;
+
+
     public void AddItemToSlot(ItemData item)
     {
         

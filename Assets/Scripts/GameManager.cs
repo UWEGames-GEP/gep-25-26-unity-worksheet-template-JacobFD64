@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public event Action<GameState> OnStateChangedEvent;
 
+    [SerializeField] private InputReader input;
+
     private void Awake()
     {
         instance = this;

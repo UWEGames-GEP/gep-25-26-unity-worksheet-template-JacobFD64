@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UserInterfaceGridLayout.FlexibleGridLayout;
 
 
 public class GridLayout : LayoutGroup
@@ -181,9 +180,19 @@ public class GridLayout : LayoutGroup
     public void GetXY(Vector3 worldPosition, out int x, out int y )
     {
         x = Mathf.FloorToInt(worldPosition.x / cellSize.x);
-        y = Mathf.FloorToInt(worldPosition.y / cellSize.y);
+        y = Mathf.FloorToInt(-worldPosition.y / cellSize.y);
     }
 
+    public Vector2 getLocalMousePosition(Vector2 localPoint)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, Input.mousePosition, null, out localPoint);
+        return localPoint;
+    }
+
+    public RectTransform getRectTransform()
+    {
+        return rectTransform;
+    }
     public override void SetLayoutHorizontal()
     {
 

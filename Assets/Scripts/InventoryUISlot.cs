@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryUISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InventoryUISlot : MonoBehaviour
 {
     private Item Item;
 
@@ -12,24 +12,21 @@ public class InventoryUISlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private Image image;
 
+    private RectTransform rect;
+
     private void Awake()
     {
     }
     private void Start()
     {
         image = GetComponent<Image>();
+        rect = GetComponent<RectTransform>();
+
+        rect.pivot = new Vector2(0, 1);
 
     }
     public void SetButton(Item item)
     {
         Item = item;
-    }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
     }
 }

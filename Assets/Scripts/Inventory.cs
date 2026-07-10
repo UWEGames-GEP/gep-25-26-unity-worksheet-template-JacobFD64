@@ -9,14 +9,16 @@ public abstract class Inventory : MonoBehaviour
 
     public List<Item> Items => items;
 
-    public event Action <Item>PickUpItemEvent;
+    public Action<Item> RemoveItemEvent { get; internal set; }
+
+    public virtual event Action <Item>PickUpItemEvent;
 
     private void Start()
     {
 
     }
 
-    protected void AddItemToInventory(Item item, int amount = 1)
+    public virtual void AddItemToInventory(Item item)
     {
         var existingItem = item;
 
@@ -25,8 +27,8 @@ public abstract class Inventory : MonoBehaviour
         PickUpItemEvent?.Invoke(item);
 
     }
-
-    public virtual void RemoveItemFromInventory(Item item, int amount = 1)
+    // This function spawns the item in front of the player as a base for removing an item
+    public virtual void RemoveItemFromInventory(Item item)
     {
         var existingItem = item;
 
@@ -45,15 +47,6 @@ public abstract class Inventory : MonoBehaviour
 
         items.Remove(existingItem);
 
-    }
-
-    public void RemoveItemFromInventory(int i)
-    {
-        if (i < items.Count)
-        {
-            RemoveItemFromInventory(items[i]);
-            Debug.Log("Drop");
-        }
     }
 
 }
